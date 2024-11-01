@@ -41,7 +41,6 @@ jobs:
       FABRIC_TENANT_ID: "${{ vars.FABRIC_TENANT_ID }}"
       TF_VAR_FABRIC_CLIENT_ID: "${{ vars.FABRIC_CLIENT_ID }}"
       TF_VAR_FABRIC_TENANT_ID: "${{ vars.FABRIC_TENANT_ID }}"
-      TF_LOG_PROVIDER_FABRIC: DEBUG
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -77,7 +76,7 @@ jobs:
       - name: Terraform Plan for ${{ inputs.terraform_action == 'destroy' && 'Destroy' || 'Apply' }}
         run: |
           # shellcheck disable=SC2086
-          terraform -chdir=./tf plan -out=tfplan -input=false ${{ inputs.terraform_action == 'destroy' && '-destroy' || '' }}
+          TF_LOG=DEBUG terraform -chdir=./tf plan -out=tfplan -input=false ${{ inputs.terraform_action == 'destroy' && '-destroy' || '' }}
 
 
       - name: Create Module Artifact
