@@ -26,6 +26,24 @@ jobs:
         run: |
           az account show
 
+  fabric-plan-identity:
+    runs-on: ubuntu-latest
+    environment: plan
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Login via Azure OIDC
+        uses: azure/login@v2
+        with:
+          client-id: ${{ vars.FABRIC_CLIENT_ID }}  
+          tenant-id: ${{ vars.FABRIC_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Confirm Azure Login
+        run: |
+          az account show
+
   azure-apply-identity:
     runs-on: ubuntu-latest
     environment: apply
@@ -39,6 +57,25 @@ jobs:
         with:
           client-id: ${{ vars.AZURE_CLIENT_ID }}  
           tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Confirm Azure Login
+        run: |
+          az account show
+
+  fabric-apply-identity:
+    runs-on: ubuntu-latest
+    environment: apply
+    needs: fabric-plan-identity
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Login via Azure OIDC
+        uses: azure/login@v2
+        with:
+          client-id: ${{ vars.FABRIC_CLIENT_ID }}  
+          tenant-id: ${{ vars.FABRIC_TENANT_ID }}
           subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
 
       - name: Confirm Azure Login
