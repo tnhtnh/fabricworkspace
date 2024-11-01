@@ -4,7 +4,7 @@ provider "azurerm" {
   # Credentials are automatically obtained via Azure CLI or environment variables
 }
 provider "fabric" {
-  use_oidc = true
+  use_oidc  = true
   client_id = var.FABRIC_CLIENT_ID
   tenant_id = var.FABRIC_TENANT_ID
 }
