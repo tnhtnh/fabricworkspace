@@ -39,6 +39,8 @@ jobs:
       FABRIC_USE_OIDC: true
       FABRIC_CLIENT_ID: "${{ vars.FABRIC_CLIENT_ID }}"
       FABRIC_TENANT_ID: "${{ vars.FABRIC_TENANT_ID }}"
+      TF_VAR_FABRIC_CLIENT_ID: "${{ vars.FABRIC_CLIENT_ID }}"
+      TF_VAR_FABRIC_TENANT_ID: "${{ vars.FABRIC_TENANT_ID }}"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
