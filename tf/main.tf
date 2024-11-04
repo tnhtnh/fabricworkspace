@@ -1,11 +1,11 @@
 # main.tf
-
-# more things here
-
-data "fabric_capacity" "capacity" {
-  display_name = "tnhtnhtnh"
+data "azurerm_automation_account" "fabric" {
+  name                = var.fabirc_automation_account_name
+  resource_group_name = var.fabricinfra_resource_group_name
 }
 
-output "capacity" {
-  value = data.fabric_capacity.capacity
+data "azurerm_automation_variable_string" "fabric_capacity_name" {
+  name                    = "capacity-name"
+  resource_group_name     = data.azurerm_automation_account.fabric.resource_group_name
+  automation_account_name = data.azurerm_automation_account.fabric.name
 }
