@@ -8,7 +8,7 @@ terraform {
     }
     fabric = {
       source  = "microsoft/fabric"
-      version = "0.1.0-beta.4"
+      version = "0.1.0-rc.2"
     }
   }
   backend "azurerm" {}
